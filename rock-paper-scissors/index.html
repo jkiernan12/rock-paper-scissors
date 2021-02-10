@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Rock Paper Scissors</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/style.css">
+
+
+</head>
+
+<body>
+
+<h1>Rock Paper Scissors</h1>
+
+
+<script>
+
+  function computerChoice(){
+    switch (Math.floor(Math.random() * 3)) {
+     case 0:
+     return "rock";
+     break;
+     case 1:
+     return "scissors";
+     break;
+     case 2:
+     return "paper"
+    }
+  }
+
+ function gameRound(comp, person) {
+   var victor = "";
+   if (person == comp) {
+        victor = "Tie";}
+   else if ((person == "rock" && comp == "paper")
+      || (person == "paper" && comp == "scissors")
+      || (person == "scissors" && comp == "rock")) {
+        victor = "Robot";}
+   else if ((person == "rock" && comp == "scissors")
+      || (person == "paper" && comp == "rock")
+      || (person == "scissors" && comp == "paper")) {
+        victor = "Human";}
+   return victor;
+}
+
+  function game() {
+    let humanScore = 0;
+    let computerScore = 0;
+
+    while (humanScore < 5 && computerScore < 5){
+    let compInput = computerChoice();
+    let huamnInput = prompt("What weapon?");
+    huamnInput = huamnInput.toLowerCase();
+    let newvictor =  gameRound(compInput, huamnInput);
+      if (newvictor == "Human") {
+        humanScore++;
+        console.log("Human won! Robot chose " + compInput);
+      } else if (newvictor == "Robot") {
+        computerScore++;
+        console.log("Computer chose " + compInput + " and won");
+      } else if (newvictor == "Tie") {
+          console.log("A tie...");
+      }
+        console.log("Human score:" + humanScore)
+        console.log("Robot score:" + computerScore);
+      }
+      if (humanScore >= 5) {
+        console.log("You won the game human!")
+      } else if (computerScore >= 5) {
+        console.log("The robots claim another victim...")
+      }
+    }
+
+    game();
+</script>
+</body>
+</html>
