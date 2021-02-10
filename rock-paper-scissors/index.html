@@ -6,15 +6,89 @@
   <title>Rock Paper Scissors</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="css/style.css">
+  <style>
+    body {
+      background-color: gray;
+      color: white;
+    }
+    h1 {
+      font-size: 48px;
+      font-weight: bold;
+      font-family: Tahoma, 'sans-serif';
+      text-transform: uppercase;
+      text-align: center;
+    }
+    h2 {
+      font-size: 32px;
+      font-weight: bold;
+      font-family: Tahoma, 'sans-serif';
+      text-transform: uppercase;
+      text-align: center;
+    }
+    .container {
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-direction: row;
+    }
+    .player-container {
 
+    }
+    .text-center {
+      text-align: center;
+    }
+
+  </style>
 
 </head>
 <body>
 
 <h1>Rock Paper Scissors</h1>
+<p class="text-center">It's a battle of wits in this classic game. Who will win? Man or machine?</p>
+<h2 class="round-outcome">Round Winner:</h2>
+<h2 id="round-winner">FIGHT!</h2>
+<div class="container">
+  <div class="player-container">
+    <h3>Human: <span id="human-score"></span></h3>
+    <img src="https://media.giphy.com/media/1hVi7JFFzplHW/source.gif" width="400"/>
+    <div class="btn-container">
+      <button id="human-rock">Rock</button>
+      <button id="human-paper">Paper</button>
+      <button id="human-scissors">Scissors</button>
+    </div>
+  </div>
+  <div class="player-container">
+    <h3>Robot: <span id="robot-score"></span></h3>
+    <img src="https://media.giphy.com/media/PDsgxQoXvUZGg/source.gif" width="400"/>
+    <div class="btn-container">
+      <button id="robo-rock">Rock</button>
+      <button id="robo-paper">Paper</button>
+      <button id="robo-scissors">Scissors</button>
+    </div>
+  </div>
+</div>
+
 
 
 <script>
+    let humanScore = 0;
+    let robotScore = 0;
+    let rockBtn = document.querySelector('#human-rock');
+    rockBtn.addEventListener('click', rockSelect);
+    function rockSelect() {
+      gameRound(computerChoice(), "rock")
+    };
+    let paperBtn = document.querySelector('#human-paper');
+    paperBtn.addEventListener('click', paperSelect);
+    function paperSelect() {
+      gameRound(computerChoice(), "paper")
+    };
+    let scissorsBtn = document.querySelector('#human-scissors');
+    scissorsBtn.addEventListener('click', scissorsSelect);
+    function scissorsSelect() {
+      gameRound(computerChoice(), "scissors")
+    };
+
 
   function computerChoice(){
     switch (Math.floor(Math.random() * 3)) {
@@ -30,49 +104,36 @@
   }
 
  function gameRound(comp, person) {
-   var victor = "";
+   let victoryMessage = document.querySelector('#round-winner');
+   let humanScoreboard = document.querySelector('#human-score');
+   let robotScoreboard = document.querySelector('#robot-score');
+   if (roundWinner(comp, person) == "Tie") {
+     victoryMessage.textContent = "It was a tie. Comptuer chose " + comp;
+   } else if (roundWinner(comp, person) == "Robot"){
+     victoryMessage.textContent = "Computer won. Comptuer chose " + comp;
+     robotScore++;
+     robotScoreboard.textContent = robotScore;
+   } else if (roundWinner(comp, person) == "Human"){
+     victoryMessage.textContent = "Human won. Comptuer chose " + comp;
+     humanScore++;
+     humanScoreboard.textContent = robotScore;
+
+   }
+
+ }
+ function roundWinner(comp, person) {
    if (person == comp) {
-        victor = "Tie";}
+        return "Tie";}
    else if ((person == "rock" && comp == "paper")
       || (person == "paper" && comp == "scissors")
       || (person == "scissors" && comp == "rock")) {
-        victor = "Robot";}
+        return "Robot";}
    else if ((person == "rock" && comp == "scissors")
       || (person == "paper" && comp == "rock")
       || (person == "scissors" && comp == "paper")) {
-        victor = "Human";}
-   return victor;
+        return "Human";}
 }
 
-  function game() {
-    let humanScore = 0;
-    let computerScore = 0;
-
-    while (humanScore < 5 && computerScore < 5){
-    let compInput = computerChoice();
-    let huamnInput = prompt("What weapon?");
-    huamnInput = huamnInput.toLowerCase();
-    let newvictor =  gameRound(compInput, huamnInput);
-      if (newvictor == "Human") {
-        humanScore++;
-        console.log("Human won! Robot chose " + compInput);
-      } else if (newvictor == "Robot") {
-        computerScore++;
-        console.log("Computer chose " + compInput + " and won");
-      } else if (newvictor == "Tie") {
-          console.log("A tie...");
-      }
-        console.log("Human score:" + humanScore)
-        console.log("Robot score:" + computerScore);
-      }
-      if (humanScore >= 5) {
-        console.log("You won the game human!")
-      } else if (computerScore >= 5) {
-        console.log("The robots claim another victim...")
-      }
-    }
-
-    game();
 </script>
 </body>
 </html>
