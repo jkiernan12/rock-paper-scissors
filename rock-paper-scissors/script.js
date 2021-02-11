@@ -63,7 +63,6 @@ function characterHit(name) { //trigger hit animation on loser
   name.offsetHeight;
   name.classList.add('player-hit');
 }
-
 function roundWinner(comp, person) { //return the player that won round
 if (person == comp) {
   return "Tie";}
