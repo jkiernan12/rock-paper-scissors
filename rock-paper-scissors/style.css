@@ -94,10 +94,12 @@ h3 {
   }
   h1 {
     margin-bottom: 0;
+    font-size: 32px;
   }
   h2 {
     font-size: 24px;
   }
+
 }
 @keyframes damaged {
   0% { transform: translate(1px, 1px) rotate(0deg);	opacity: 1; filter: grayscale(100%) sepia(100%) hue-rotate(320deg) saturate(4);}
