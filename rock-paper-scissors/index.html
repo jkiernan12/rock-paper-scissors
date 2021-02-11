@@ -5,69 +5,9 @@
   <meta charset="utf-8">
   <title>Rock Paper Scissors</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css">
   <link rel="stylesheet" href="stylesheet-tome.css">
-  <style>
-    body {
-      background-image: url("https://pbs.twimg.com/media/ELF5Ea4XUAAdX_Y?format=jpg&name=large");
-      background-size: cover;
-      background-position: center;
-      color: white;
-    }
-    h1, h2, h3 {
-      font-family: tomeoftheunknownregular, 'sans-serif';
-      text-align: center;
-      filter: drop-shadow(7px 7px 20px black);
-    }
-    h1 {
-      font-size: 48px;
-      text-align: center;
-    }
-    h2 {
-      font-size: 32px;
-      font-weight: bold;
-      text-align: center;
-    }
-    h3 {
-      font-size: 32px;
-    }
-    .container {
-      display: flex;
-      justify-content: space-around;
-      align-items: stretch;
-      flex-direction: row;
-      flex-wrap: nowrap;
-    }
-    .flex-column {
-      display: flex;
-      justify-content: space-around;
-      align-items: center;
-      flex-direction: column;
-      flex-shrink: 1;
-      width: 33%;
-    }
-    .player-container {
-      display: flex;
-      justify-content:space-around;
-      align-items: center;
-      flex-direction: column;
-      flex-shrink: 1;
-      width: 33%;
-    }
-    .player-image {
-      width:100%;
-    }
-    .text-center {
-      text-align: center;
-    }
-    .user-button {
-      font-size:50px;
-      height:90px;
-      width: 90px;
-    }
-
-  </style>
-
+  <link rel="stylesheet" type="text/css" href="https://csshake.surge.sh/csshake.min.css">
 </head>
 <body>
 <h1><em>Rock Paper Scissors</em></h1>
@@ -75,107 +15,27 @@
 <div class="container">
   <div class="player-container">
     <h3>Gregory: <span id="human-score">0</span></h3>
-    <img style="width:150px;" class="player-image" width="100px" src="https://i.pinimg.com/originals/77/ff/af/77ffaf20999a2f3269149ee6ee628c56.png"/>
+    <img style="width:150px;" id="hero-pic" class="player-image" width="100px" src="https://i.pinimg.com/originals/77/ff/af/77ffaf20999a2f3269149ee6ee628c56.png"/>
 
   </div>
   <div class="flex-column">
       <h2 id="round-winner">Fight!</h2>
     <div class="btn-container">
       <input type="image" src="https://sites.google.com/a/richland2.org/indonesia-fantone-dyer1/_/rsrc/1419968512682/home/rock-facts-of-indonesia/clear%20rock%20fact.png?height=164&width=200" class="user-button" id="human-rock"></input>
-      <input type="image" src="https://img.onglesdor.com/media/catalog/product/cache/70a63e613e74d64a1e3f0cef70f6a3a7/o/d/odoccdo-ongles-d-or-bird-shaped-right-handed-cuticle-scissor-base-en.png" class="user-button" id="human-paper"></input>
-      <input type="image" src="https://i.pinimg.com/originals/fe/8a/bf/fe8abfc0a9a990f2bb594c24c9071bb3.png" class="user-button" id="human-scissors"></input>
+      <input type="image" src="https://i.pinimg.com/originals/fe/8a/bf/fe8abfc0a9a990f2bb594c24c9071bb3.png"  class="user-button" id="human-paper"></input>
+      <input type="image" src="https://img.onglesdor.com/media/catalog/product/cache/70a63e613e74d64a1e3f0cef70f6a3a7/o/d/odoccdo-ongles-d-or-bird-shaped-right-handed-cuticle-scissor-base-en.png" class="user-button" id="human-scissors"></input>
     </div>
-
-
     </div>
 
   <div class="player-container">
     <h3>The Beast: <span id="robot-score">0</span></h3>
-    <img class="player-image"  src="https://i.pinimg.com/originals/db/27/f8/db27f88f630a499afd3f9593733ebf55.png" />
+    <img id="villain-pic" class="player-image"  src="https://i.pinimg.com/originals/db/27/f8/db27f88f630a499afd3f9593733ebf55.png" />
     <div class="btn-container">
-      <button id="robo-rock">Rock</button>
-      <button id="robo-paper">Paper</button>
-      <button id="robo-scissors">Scissors</button>
     </div>
   </div>
   </div>
 </div>
 
-
-
-<script>
-    let humanScore = 0;
-    let robotScore = 0;
-    let rockBtn = document.querySelector('#human-rock');
-    rockBtn.addEventListener('click', rockSelect);
-    function rockSelect() {
-      gameRound(computerChoice(), "rock")
-    };
-    let paperBtn = document.querySelector('#human-paper');
-    paperBtn.addEventListener('click', paperSelect);
-    function paperSelect() {
-      gameRound(computerChoice(), "paper")
-    };
-    let scissorsBtn = document.querySelector('#human-scissors');
-    scissorsBtn.addEventListener('click', scissorsSelect);
-    function scissorsSelect() {
-      gameRound(computerChoice(), "scissors")
-    };
-
-
-  function computerChoice(){
-    switch (Math.floor(Math.random() * 3)) {
-     case 0:
-     return "rock";
-     break;
-     case 1:
-     return "scissors";
-     break;
-     case 2:
-     return "paper"
-    }
-  }
-
- function gameRound(comp, person) {
-   let victoryMessage = document.querySelector('#round-winner');
-   let humanScoreboard = document.querySelector('#human-score');
-   let robotScoreboard = document.querySelector('#robot-score');
-   if (humanScore >= 5) {
-    victoryMessage.textContent = "HUMAN WINS THE GAME"
-    humanScore = 0;
-    robotScore = 0;
-  } else if (robotScore >= 5) {
-    victoryMessage.textContent = "COMPUTER WINS THE GMAE"
-    humanScore = 0;
-    robotScore = 0;
-  }
-   else if (roundWinner(comp, person) == "Tie") {
-     victoryMessage.textContent = "It was a tie. Comptuer chose " + comp;
-   } else if (roundWinner(comp, person) == "Robot"){
-     victoryMessage.textContent = "Computer won. Comptuer chose " + comp;
-     robotScore++;
-     robotScoreboard.textContent = robotScore;
-   } else if (roundWinner(comp, person) == "Human"){
-     victoryMessage.textContent = "Human won. Comptuer chose " + comp;
-     humanScore++;
-     humanScoreboard.textContent = humanScore;
-   }
-
-
- }
- function roundWinner(comp, person) {
-   if (person == comp) {
-        return "Tie";}
-   else if ((person == "rock" && comp == "paper")
-      || (person == "paper" && comp == "scissors")
-      || (person == "scissors" && comp == "rock")) {
-        return "Robot";}
-   else if ((person == "rock" && comp == "scissors")
-      || (person == "paper" && comp == "rock")
-      || (person == "scissors" && comp == "paper")) {
-        return "Human";}
-}
-
-</script>
+<script src="script.js"></script>
 </body>
 </html>
