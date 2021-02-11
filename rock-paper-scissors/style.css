@@ -78,7 +78,7 @@ h3 {
   .container {
 
     justify-content: flex-start;
-    align-items: stretch;
+    align-items: flex-start;
     flex-wrap: wrap;
   }
   .flex-column {
